@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import { insertBookmark } from "../ui/bookmark.services";
 
 function CreateBookmarkForm({ setHabit }: { setHabit: Function }) {
-    const { mutate } = useMutation({
+    const { mutate, isPending } = useMutation({
         mutationFn: insertBookmark,
+        onSettled: () => setHabit(false),
     });
 
     const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -18,7 +19,6 @@ function CreateBookmarkForm({ setHabit }: { setHabit: Function }) {
         };
 
         mutate(data);
-        setHabit(false);
     };
 
     return (
@@ -78,7 +78,7 @@ function CreateBookmarkForm({ setHabit }: { setHabit: Function }) {
                         className="p-2 bg-[#D4AF37] hover:bg-[#8C641D] font-medium text-[#000000] rounded-md cursor-pointer"
                         type="submit"
                     >
-                        Submit
+                        {isPending?"Bookmark'in":"Bookmark"}
                     </motion.button>
 
                     <motion.button

@@ -12,10 +12,6 @@ const signInWithGoogle = async () => {
         provider: "google",
         options: {
             redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback/google`,
-            // queryParams: {
-            //     access_type: "offline",
-            //     prompt: "consent",
-            // },
         },
     });
 };

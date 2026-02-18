@@ -14,7 +14,7 @@ function BookmarkList({
     url: string;
 }) {
     const [invisible, setInvisible] = useState(false);
-    const { mutate, isPending } = useMutation({
+    const { mutate } = useMutation({
         mutationFn: deleteBookmarkById,
     });
 
@@ -59,23 +59,20 @@ function BookmarkList({
                             Delete Bookmark
                         </motion.p>
                     )}
-                    {isPending ? (
-                        <p>Deleting Bookmark</p>
-                    ) : (
-                        <motion.button
-                            whileHover={{ scale: 1.5 }}
-                            whileTap={{ scale: 0.7 }}
-                        >
-                            <Image
-                                onMouseEnter={() => setInvisible(true)}
-                                className="w-5 h-5 cursor-pointer duration-150 ease-in-out"
-                                src="./delete.svg"
-                                alt="Delete Image"
-                                width={30}
-                                height={30}
-                            />
-                        </motion.button>
-                    )}
+
+                    <motion.button
+                        whileHover={{ scale: 1.5 }}
+                        whileTap={{ scale: 0.7 }}
+                    >
+                        <Image
+                            onMouseEnter={() => setInvisible(true)}
+                            className="w-5 h-5 cursor-pointer duration-150 ease-in-out"
+                            src="./delete.svg"
+                            alt="Delete Image"
+                            width={30}
+                            height={30}
+                        />
+                    </motion.button>
                 </div>
             </motion.div>
         </section>

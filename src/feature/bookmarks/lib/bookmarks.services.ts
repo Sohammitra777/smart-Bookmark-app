@@ -12,7 +12,6 @@ const bookmarkServices = {
     getBookmarks: async (userId: string) => {
         const getBookmarksResult =
             await bookmarksRepo.getBookmarksByUserId(userId);
-        console.log(getBookmarksResult);
 
         return getBookmarksResult;
     },

@@ -6,6 +6,6 @@ export async function DELETE(
     { params }: { params: Promise<{ id: string }> },
 ) {
     const { id } = await params;
-    const result = await bookmarkServices.deleteBookmark(id);
-    return NextResponse.json(result);
+    await bookmarkServices.deleteBookmark(id);
+    return NextResponse.json({message: "deletion successfull"});
 }
