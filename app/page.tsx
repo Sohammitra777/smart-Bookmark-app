@@ -7,12 +7,11 @@ import { useRouter } from "next/navigation";
 
 const signInWithGoogle = async () => {
     const supabase = createClient();
-    console.log("entered");
-    console.log(`${location.origin}/api/auth/callback/google`);
+
     await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-            redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback/google`,
+            redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/callback/google`,
             // queryParams: {
             //     access_type: "offline",
             //     prompt: "consent",
