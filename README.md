@@ -25,8 +25,7 @@ The project was built to showcase practical full-stack development skills, archi
 
 **Frontend**
 
-* Next.js 16
-* React 19
+* Next.js
 * Tailwind CSS 4
 * Framer Motion
 * Tanstack Query
