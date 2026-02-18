@@ -1,6 +1,6 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/src/config/supabase/client";
 import { User } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -9,14 +9,14 @@ const signInWithGoogle = async () => {
     const supabase = createClient();
     console.log("entered");
     console.log(`${location.origin}/api/auth/callback/google`);
-    const data = await supabase.auth.signInWithOAuth({
+    await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
             redirectTo: `${location.origin}/api/auth/callback/google`,
-            queryParams :{
-                access_type: "offline", 
-                prompt: "consent"
-            }
+            // queryParams: {
+            //     access_type: "offline",
+            //     prompt: "consent",
+            // },
         },
     });
 };
@@ -48,10 +48,10 @@ export default function Home() {
     }, [user]);
 
     return (
-        <main className="flex h-screen items-center justify-center">
+        <main className="h-screen flex justify-center items-center">
             <button
+                className="text-black bg-[#F5DEB3] p-2 rounded-2xl cursor-pointer hover:font-bold hover:border border-red duration-150"
                 onClick={signInWithGoogle}
-                className="rounded-lg bg-black px-6 py-3 text-white"
             >
                 Login with Google
             </button>

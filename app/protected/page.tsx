@@ -1,48 +1,47 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/src/config/supabase/client";
 import { useEffect, useState } from "react";
 import type { User } from "@supabase/supabase-js";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
+import ShowBookmarks from "@/src/feature/bookmarks/ui/components/ShowBookmarks";
+import Navbar from "@/src/shared/layout/Navbar";
+import LoadingPage from "@/src/shared/layout/Loading";
 
 export default function ProtectedUser() {
     const [user, setUser] = useState<User | null>(null);
+    const [loading, setLoading] = useState(true);
+
     const supabase = createClient();
+    const router = useRouter();
 
     useEffect(() => {
-        const supabase = createClient();
-
         const getUser = async () => {
             const { data, error } = await supabase.auth.getUser();
 
             if (error) {
                 console.error("Auth error:", error);
-                return;
             }
 
             setUser(data.user);
-            console.log(data.user);
+            setLoading(false);
         };
 
         getUser();
     }, []);
 
-    if (!user) {
-        return <main>Loading...</main>;
-    }
+    useEffect(() => {
+        if (!loading && !user) {
+            router.push("/");
+        }
+    }, [loading, user]);
+
+    if (loading) <LoadingPage />;
 
     return (
         <main>
-            <p>{user.id}</p>
-            <button
-                className="text-white border-white p-2"
-                onClick={() => {
-                    supabase.auth.signOut();
-                    redirect("http://localhost:3000/");
-                }}
-            >
-                logout
-            </button>
+            <Navbar />
+            <ShowBookmarks />
         </main>
     );
 }
