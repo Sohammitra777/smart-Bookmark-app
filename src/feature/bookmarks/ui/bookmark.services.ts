@@ -1,7 +1,7 @@
 import baseUrl from "@/src/config/api/axios";
 import axios from "axios";
 
-const bookmarkUrl = baseUrl + "/test";
+const bookmarkUrl = baseUrl + "/bookmark";
 
 export type Bookmark = {
     id: string;

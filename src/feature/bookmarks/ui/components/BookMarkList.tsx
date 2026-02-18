@@ -40,7 +40,7 @@ function BookmarkList({
                             "
             >
                 <div>
-                    <h1>{title}</h1>
+                    <h1>{title.charAt(0).toUpperCase() + title.slice(1)}</h1>
                     <a className="hover:underline" href={url}>
                         {url}
                     </a>

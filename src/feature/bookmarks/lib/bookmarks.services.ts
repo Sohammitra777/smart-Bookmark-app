@@ -2,7 +2,11 @@ import { bookmarksRepo } from "./bookmarks.repo";
 
 const bookmarkServices = {
     insertBookmark: async (userId: string, title: string, url: string) => {
-        await bookmarksRepo.insertBookmark(userId, title, url);
+        await bookmarksRepo.insertBookmark(
+            userId,
+            title.toLowerCase(),
+            url.toLowerCase(),
+        );
     },
 
     getBookmarks: async (userId: string) => {
